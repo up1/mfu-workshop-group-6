@@ -10,19 +10,34 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-@WebServlet("/hello")
-public class HelloServlet extends HttpServlet {
+@WebServlet("/wallet")
+public class WalletServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+    protected void doGet(HttpServletRequest req, HttpServletResponse response)
             throws ServletException, IOException {
 
         User user = new User();
-        user.setId("1");
-        user.setName("Up1");
+        user.setId("001");
+        user.setName("Aj.Tew");
 
         ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(resp.getOutputStream(), user);
+        mapper.writeValue(response.getOutputStream(), user);
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        User sendUser = mapper.readValue(req.getInputStream(), User.class);
+
+        User user = new User();
+        user.setId("001");
+        user.setName("Response from POST form " + sendUser.getName());
+
+        mapper.writeValue(response.getOutputStream(), user);
 
     }
 
