@@ -1,10 +1,17 @@
 <html>
 <head>
+<style type="text/css">
+ul {
+    list-style: none; /* Remove list bullets */
+    padding: 0;
+    margin: 0;
+}
+</style>
 </head>
 <body>
 
 <h1>E-Wallet</h1><p></p>
-<h1>User</h1>
+<h5>User</h5>
 <ul>
 
 <li>id: <span id="_id"></span></li>
@@ -13,16 +20,21 @@
 </ul>
 
 
-<h1>Product</h1>
+<h5>Product</h5>
 <ul>
 <li>code: <span id="productId"></span></li>
 <li>name: <span id="productName"></span></li>
 <li>price: <span id="productPrice"></span></li>
 </ul>
 
+<p>Fee : 1 บาท</p>
 
+<li>total: <span id="total"></span></li>
 
 <script language="JavaScript">
+
+var money;
+var productPrice;
 var ajax = new XMLHttpRequest();
 ajax.onload = user;
 ajax.onerror = errorFunctionName;
@@ -35,7 +47,7 @@ function user() {
         var json = JSON.parse(this.responseText);
         var _id = json.id;
         var _name = json.name;
-        var money = json.money;
+        money = json.money;
         document.getElementById("_id").innerHTML = _id;
         document.getElementById("_name").innerHTML = _name;
         document.getElementById("money").innerHTML = money;
@@ -56,10 +68,12 @@ function product() {
         var json = JSON.parse(this.responseText);
         var productId = json.productId;
         var productName = json.productName;
-        var productPrice = json.productPrice;
+        productPrice = json.productPrice;
         document.getElementById("productId").innerHTML = productId;
         document.getElementById("productName").innerHTML = productName;
         document.getElementById("productPrice").innerHTML = productPrice;
+        var total = money -productPrice - 1 ;
+   	 document.getElementById("total").innerHTML = total;
     } else {
         // TODO
     }
@@ -70,6 +84,7 @@ function errorFunctionName(e) {
     console.log(this);
     console.error(e);
 }
+
 </script>
 
 
