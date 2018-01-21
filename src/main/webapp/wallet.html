@@ -1,36 +1,70 @@
-<h1>E-Wallet</h1>
+<html>
+<head>
+</head>
+<body>
+
+<h1>E-Wallet</h1><p></p>
+<h1>User</h1>
+<ul>
+
 <li>id: <span id="_id"></span></li>
 <li>name: <span id="_name"></span></li>
+<li>money: <span id="money"></span></li>
+</ul>
 
 
-
-
-
-
-
-
-
+<h1>Product</h1>
+<ul>
+<li>code: <span id="productId"></span></li>
+<li>name: <span id="productName"></span></li>
+<li>price: <span id="productPrice"></span></li>
+</ul>
 
 
 
 <script language="JavaScript">
 var ajax = new XMLHttpRequest();
-ajax.onload = functionName;
+ajax.onload = user;
 ajax.onerror = errorFunctionName;
-ajax.open("GET", "http://localhost:8080/api/wallet", true);
+ajax.open("GET", "http://localhost:8080/api/user", true);
 ajax.send();
 
-function functionName() {
+function user() {
     console.log(this);
     if (this.status == 200) {
         var json = JSON.parse(this.responseText);
         var _id = json.id;
         var _name = json.name;
+        var money = json.money;
         document.getElementById("_id").innerHTML = _id;
         document.getElementById("_name").innerHTML = _name;
+        document.getElementById("money").innerHTML = money;
     } else {
         // TODO
     }
+}
+
+var ajax = new XMLHttpRequest();
+ajax.onload = product;
+ajax.onerror = errorFunctionName;
+ajax.open("GET", "http://localhost:8080/api/product", true);
+ajax.send();
+
+function product() {
+    console.log(this);
+    if (this.status == 200) {
+        var json = JSON.parse(this.responseText);
+        var productId = json.productId;
+        var productName = json.productName;
+        var productPrice = json.productPrice;
+        document.getElementById("productId").innerHTML = productId;
+        document.getElementById("productName").innerHTML = productName;
+        document.getElementById("productPrice").innerHTML = productPrice;
+    } else {
+        // TODO
+    }
+    
+    
 }
 function errorFunctionName(e) {
     console.log(this);
@@ -58,5 +92,5 @@ function errorFunctionName(e) {
     }
 
 </script>
-
-
+</body>
+</html>

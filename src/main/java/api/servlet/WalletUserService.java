@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-@WebServlet("/wallet")
-public class WalletServlet extends HttpServlet {
+@WebServlet("/user")
+public class WalletUserService extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse response)
@@ -20,9 +20,18 @@ public class WalletServlet extends HttpServlet {
         User user = new User();
         user.setId("001");
         user.setName("Aj.Tew");
+        user.setMoney(1500);
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(response.getOutputStream(), user);
+        
+        Product product = new Product();
+        product.setProductId("001");
+        product.setProductName("coco");
+        product.setProductPrice(55);
+
+        ObjectMapper mapper1 = new ObjectMapper();
+        mapper.writeValue(response.getOutputStream(), product);
 
     }
 
