@@ -31,7 +31,7 @@ public class WalletUserService extends HttpServlet {
         product.setProductPrice(55);
 
         ObjectMapper mapper1 = new ObjectMapper();
-        mapper.writeValue(response.getOutputStream(), product);
+        mapper1.writeValue(response.getOutputStream(), product);
 
     }
 
